@@ -17,5 +17,11 @@ dbt/dbt_packages/
 dbt/logs/
 dbt/.user.yml
 
+# Keys and secrets
+rsa_key.*
+
 # OS
 .DS_Store
+
+# airflow data
+airflow/
