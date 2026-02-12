@@ -1,0 +1,23 @@
+jaffle_shop:
+  outputs:
+    dev:
+      type: snowflake
+      account: ADMIRALPIONEER-TOOLBOX
+      user: sandbox
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY') }}"
+      role: sandbox_admin
+      warehouse: sandbox_wh
+      database: sandbox_db
+      schema: jaffle_shop_dev
+      threads: 1
+    prod:
+      type: snowflake
+      account: ADMIRALPIONEER-TOOLBOX
+      user: sandbox
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY') }}"
+      role: sandbox_admin
+      warehouse: sandbox_wh
+      database: sandbox_db
+      schema: jaffle_shop
+      threads: 1
+  target: dev
