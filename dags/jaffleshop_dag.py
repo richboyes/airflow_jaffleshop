@@ -1,5 +1,5 @@
 """
-Jaffle Shop dbt DAG using Cosmos.
+Jaffle Shop dbt DAG using Cosmos for Airflow.
 """
 
 import os
