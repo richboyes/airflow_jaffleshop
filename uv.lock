@@ -17,6 +17,15 @@ wheels = [
 ]
 
 [[package]]
+name = "aenum"
+version = "3.1.16"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/7a/61ed58e8be9e30c3fe518899cc78c284896d246d51381bab59b5db11e1f3/aenum-3.1.16.tar.gz", hash = "sha256:bfaf9589bdb418ee3a986d85750c7318d9d2839c1b1a1d6fe8fc53ec201cf140", size = 137693, upload-time = "2026-01-12T22:34:38.819Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e3/52/6ad8f63ec8da1bf40f96996d25d5b650fdd38f5975f8c813732c47388f18/aenum-3.1.16-py3-none-any.whl", hash = "sha256:9035092855a98e41b66e3d0998bd7b96280e85ceb3a04cc035636138a1943eaf", size = 165627, upload-time = "2025-04-25T03:17:58.89Z" },
+]
+
+[[package]]
 name = "agate"
 version = "1.9.1"
 source = { registry = "https://pypi.org/simple" }
@@ -61,6 +70,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "apache-airflow" },
+    { name = "astronomer-cosmos", extra = ["dbt-snowflake"] },
     { name = "dbt-core" },
     { name = "dbt-snowflake" },
 ]
@@ -68,6 +78,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "apache-airflow", specifier = ">=3.1.7" },
+    { name = "astronomer-cosmos", extras = ["dbt-snowflake"], specifier = ">=1.13.0" },
     { name = "dbt-core", specifier = ">=1.11.4" },
     { name = "dbt-snowflake", specifier = ">=1.11.2" },
 ]
@@ -331,6 +342,32 @@ wheels = [
 ]
 
 [[package]]
+name = "astronomer-cosmos"
+version = "1.13.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aenum" },
+    { name = "apache-airflow" },
+    { name = "attrs" },
+    { name = "deprecation" },
+    { name = "jinja2" },
+    { name = "msgpack" },
+    { name = "openlineage-integration-common" },
+    { name = "packaging" },
+    { name = "pydantic" },
+    { name = "virtualenv" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3d/66/5560700d93f7489e22149d0defaed0e4dc385aa5ac54c7e7060eb637b8e6/astronomer_cosmos-1.13.0.tar.gz", hash = "sha256:f4d6a6d30926deb74a28720aa2eb2242b9229b5a6a5f9d0aea2cdefc61ed1bf0", size = 144364, upload-time = "2026-01-30T16:35:24.695Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/45/f7/39081249d4e95e132ecc3b82eb5c32adea6b07a703cecf57c9a6d3970ecb/astronomer_cosmos-1.13.0-py3-none-any.whl", hash = "sha256:e0075074e67189531e97231aae84af38a8cbb5acec15663fcf95ccfa36f66f39", size = 202112, upload-time = "2026-01-30T16:35:23.014Z" },
+]
+
+[package.optional-dependencies]
+dbt-snowflake = [
+    { name = "dbt-snowflake" },
+]
+
+[[package]]
 name = "attrs"
 version = "25.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -374,6 +411,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ed/a6/d15f5dfe990abd76dbdb2105a7697e0d948e04c41dfd97c058bc76c7cebd/botocore-1.42.47.tar.gz", hash = "sha256:c26e190c1b4d863ba7b44dc68cc574d8eb862ddae5f0fe3472801daee12a0378", size = 14952255, upload-time = "2026-02-11T20:49:40.157Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/5e/50e3a59b243894088eeb949a654fb21d9ab7d0d703034470de016828d85a/botocore-1.42.47-py3-none-any.whl", hash = "sha256:c60f5feaf189423e17755aca3f1d672b7466620dd2032440b32aaac64ae8cac8", size = 14625351, upload-time = "2026-02-11T20:49:36.143Z" },
+]
+
+[[package]]
+name = "build"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "os_name == 'nt'" },
+    { name = "packaging" },
+    { name = "pyproject-hooks" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/42/18/94eaffda7b329535d91f00fe605ab1f1e5cd68b2074d03f255c7d250687d/build-1.4.0.tar.gz", hash = "sha256:f1b91b925aa322be454f8330c6fb48b465da993d1e7e7e6fa35027ec49f3c936", size = 50054, upload-time = "2026-01-08T16:41:47.696Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c5/0d/84a4380f930db0010168e0aa7b7a8fed9ba1835a8fbb1472bc6d0201d529/build-1.4.0-py3-none-any.whl", hash = "sha256:6a07c1b8eb6f2b311b96fcbdbce5dab5fe637ffda0fd83c9cac622e927501596", size = 24141, upload-time = "2026-01-08T16:41:46.453Z" },
 ]
 
 [[package]]
@@ -808,12 +859,33 @@ wheels = [
 ]
 
 [[package]]
+name = "deprecation"
+version = "2.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5a/d3/8ae2869247df154b64c1884d7346d412fed0c49df84db635aab2d1c40e62/deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff", size = 173788, upload-time = "2020-04-20T14:23:38.738Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/02/c3/253a89ee03fc9b9682f1541728eb66db7db22148cd94f89ab22528cd1e1b/deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a", size = 11178, upload-time = "2020-04-20T14:23:36.581Z" },
+]
+
+[[package]]
 name = "dill"
 version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/81/e1/56027a71e31b02ddc53c7d65b01e68edf64dea2932122fe7746a516f75d5/dill-0.4.1.tar.gz", hash = "sha256:423092df4182177d4d8ba8290c8a5b640c66ab35ec7da59ccfa00f6fa3eea5fa", size = 187315, upload-time = "2026-01-19T02:36:56.85Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/77/dc8c558f7593132cf8fefec57c4f60c83b16941c574ac5f619abb3ae7933/dill-0.4.1-py3-none-any.whl", hash = "sha256:1e1ce33e978ae97fcfcff5638477032b801c46c7c65cf717f95fbc2248f79a9d", size = 120019, upload-time = "2026-01-19T02:36:55.663Z" },
+]
+
+[[package]]
+name = "distlib"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/8e/709914eb2b5749865801041647dc7f4e6d00b549cfe88b65ca192995f07c/distlib-0.4.0.tar.gz", hash = "sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d", size = 614605, upload-time = "2025-07-17T16:52:00.465Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/6b/e0547afaf41bf2c42e52430072fa5658766e3d65bd4b03a563d1b6336f57/distlib-0.4.0-py2.py3-none-any.whl", hash = "sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16", size = 469047, upload-time = "2025-07-17T16:51:58.613Z" },
 ]
 
 [[package]]
@@ -1572,6 +1644,48 @@ wheels = [
 ]
 
 [[package]]
+name = "openlineage-integration-common"
+version = "1.43.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "openlineage-python" },
+    { name = "openlineage-sql" },
+    { name = "pyyaml" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8a/61/48ddc9f0870ade271e0d9185a29fefccdc468d86035f78abbd72f8da93b3/openlineage_integration_common-1.43.0-py3-none-any.whl", hash = "sha256:b073b77b0504761367fd0f9a07f49cb775397066a1588c63c5ee3619fffe180c", size = 57257, upload-time = "2026-01-22T22:12:40.546Z" },
+]
+
+[[package]]
+name = "openlineage-python"
+version = "1.43.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "build" },
+    { name = "httpx" },
+    { name = "packaging" },
+    { name = "python-dateutil" },
+    { name = "pyyaml" },
+    { name = "requests" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/45/06/0961cb1e706cc0a02f2d9b417bccf0e9d1faacc429b48372c36019441154/openlineage_python-1.43.0-py3-none-any.whl", hash = "sha256:595dc641f696d0a1c021440a9ff8155f4e2776452cf118112a09b12cf4038827", size = 100811, upload-time = "2026-01-22T22:12:41.83Z" },
+]
+
+[[package]]
+name = "openlineage-sql"
+version = "1.43.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9a/b4/851d43a74faff3e5b2f4a3007ab46fcb2e8b36432e11598d7c9ec0d1a5c0/openlineage_sql-1.43.0.tar.gz", hash = "sha256:9494957e266e107d9c9c8c3af93b096af14063e53e033bd8414b9fc764b39ea0", size = 40344, upload-time = "2026-01-22T22:12:47.368Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/38/eb/5aa3f25d2e7490ff624c0558ae40169dc0eb40efc1fb163a42ff87f3eb4a/openlineage_sql-1.43.0-cp39-abi3-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:477aaeefd791c391c95327ed211ae551f3e8fa8806af0bbc7694d8bfd09446df", size = 4927709, upload-time = "2026-01-22T22:12:43.228Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/0d/2075e7ec7337e7cf5a2c1df6b8a1e465d1d23d4daa98841697075151a812/openlineage_sql-1.43.0-cp39-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:0ea1ae3f17f97c53770e264f8e2962abf8c6c743f3413ef09fbbdd447b898bda", size = 2461433, upload-time = "2026-01-22T22:12:44.855Z" },
+    { url = "https://files.pythonhosted.org/packages/79/29/468186ed9964a647d0a9321fe6c1c3c4c60614b3a4b08e68769746b0ef28/openlineage_sql-1.43.0-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:9500597c0ebf2b9f8991516de263f8d5581a725928870ee93a2671f6cd6b53ab", size = 2608803, upload-time = "2026-01-22T22:12:46.21Z" },
+]
+
+[[package]]
 name = "opentelemetry-api"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1969,6 +2083,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/80/be/97b83a464498a79103036bc74d1038df4a7ef0e402cfaf4d5e113fb14759/pyopenssl-25.3.0.tar.gz", hash = "sha256:c981cb0a3fd84e8602d7afc209522773b94c1c2446a3c710a75b06fe1beae329", size = 184073, upload-time = "2025-09-17T00:32:21.037Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d1/81/ef2b1dfd1862567d573a4fdbc9f969067621764fbb74338496840a1d2977/pyopenssl-25.3.0-py3-none-any.whl", hash = "sha256:1fda6fc034d5e3d179d39e59c1895c9faeaf40a79de5fc4cbbfbe0d36f4a77b6", size = 57268, upload-time = "2025-09-17T00:32:19.474Z" },
+]
+
+[[package]]
+name = "pyproject-hooks"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e7/82/28175b2414effca1cdac8dc99f76d660e7a4fb0ceefa4b4ab8f5f6742925/pyproject_hooks-1.2.0.tar.gz", hash = "sha256:1e859bd5c40fae9448642dd871adf459e5e2084186e8d2c2a79a824c970da1f8", size = 19228, upload-time = "2024-09-29T09:24:13.293Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/24/12818598c362d7f300f18e74db45963dbcb85150324092410c8b49405e42/pyproject_hooks-1.2.0-py3-none-any.whl", hash = "sha256:9e5c6bfa8dcc30091c74b0cf803c81fdd29d94f01992a7707bc97babb1141913", size = 10216, upload-time = "2024-09-29T09:24:11.978Z" },
 ]
 
 [[package]]
@@ -2742,6 +2865,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/37/945b4ca0ac27e3dc4952642d4c900edd030b3da6c9634875af6e13ae80e5/uvloop-0.22.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b91328c72635f6f9e0282e4a57da7470c7350ab1c9f48546c0f2866205349d21", size = 4467065, upload-time = "2025-10-16T22:16:58.206Z" },
     { url = "https://files.pythonhosted.org/packages/97/cc/48d232f33d60e2e2e0b42f4e73455b146b76ebe216487e862700457fbf3c/uvloop-0.22.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:daf620c2995d193449393d6c62131b3fbd40a63bf7b307a1527856ace637fe88", size = 4328384, upload-time = "2025-10-16T22:16:59.36Z" },
     { url = "https://files.pythonhosted.org/packages/e4/16/c1fd27e9549f3c4baf1dc9c20c456cd2f822dbf8de9f463824b0c0357e06/uvloop-0.22.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:6cde23eeda1a25c75b2e07d39970f3374105d5eafbaab2a4482be82f272d5a5e", size = 4296730, upload-time = "2025-10-16T22:17:00.744Z" },
+]
+
+[[package]]
+name = "virtualenv"
+version = "20.36.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "distlib" },
+    { name = "filelock" },
+    { name = "platformdirs" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/aa/a3/4d310fa5f00863544e1d0f4de93bddec248499ccf97d4791bc3122c9d4f3/virtualenv-20.36.1.tar.gz", hash = "sha256:8befb5c81842c641f8ee658481e42641c68b5eab3521d8e092d18320902466ba", size = 6032239, upload-time = "2026-01-09T18:21:01.296Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6a/2a/dc2228b2888f51192c7dc766106cd475f1b768c10caaf9727659726f7391/virtualenv-20.36.1-py3-none-any.whl", hash = "sha256:575a8d6b124ef88f6f51d56d656132389f961062a9177016a50e4f507bbcc19f", size = 6008258, upload-time = "2026-01-09T18:20:59.425Z" },
 ]
 
 [[package]]

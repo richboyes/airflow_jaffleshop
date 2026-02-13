@@ -1,6 +1,6 @@
 ## Airflow Jaffle Shop 🧇 Project
 
-Jaffle Shop dbt pipelines orchestrated with Apache Airflow.
+Jaffle Shop [dbt](https://www.getdbt.com/) pipelines orchestrated with [Apache Airflow](https://airflow.apache.org/) & [Cosmos](https://astronomer.github.io/astronomer-cosmos/).
 
 ### Prerequisites
 
@@ -41,6 +41,7 @@ See the generated credentials in `airflow/simple_auth_manager_passwords.json`
 You can still run dbt commands directly without Airflow:
 
 ```bash
+uv sync
 source .venv/bin/activate
 source .env
 cd dbt
@@ -50,9 +51,10 @@ dbt build
 
 ### Stopping Airflow
 
-Press `Ctrl+C` in both terminals running the scheduler and webserver.
+Press `Ctrl+C` in the terminal running `airflow standalone`
 
 ### Additional Resources
 
 - [Apache Airflow Documentation](https://airflow.apache.org/docs/)
+- [Astronomer Cosmos Documentation](https://astronomer.github.io/astronomer-cosmos/)
 - [dbt Documentation](https://docs.getdbt.com/)

@@ -1,49 +1,51 @@
 """
-Jaffle Shop dbt DAG.
+Jaffle Shop dbt DAG using Cosmos.
 
-This DAG runs dbt commands to build the Jaffle Shop data models.
+This DAG uses Astronomer Cosmos to automatically create Airflow tasks
+for each dbt model, providing better visualization and granular control.
 """
 
-from airflow import DAG
-from airflow.providers.standard.operators.bash import BashOperator
+import os
 from datetime import datetime
 from pathlib import Path
-import os
+
+from cosmos import DbtDag, ExecutionConfig, ProfileConfig, ProjectConfig
+from cosmos.constants import ExecutionMode
 
 # Get the project root directory
 PROJECT_ROOT = Path(__file__).parent.parent
 DBT_PROJECT_PATH = PROJECT_ROOT / "dbt"
 
-default_args = {
-    "owner": "data_team",
-    "retries": 0,
-}
+# Configure Cosmos to use your existing profiles.yml
+profile_config = ProfileConfig(
+    profile_name="jaffle_shop",
+    target_name="dev",
+    profiles_yml_filepath=DBT_PROJECT_PATH / "profiles.yml",
+)
 
-with DAG(
-    dag_id="jaffle_shop",
-    default_args=default_args,
-    description="Jaffle Shop dbt pipeline",
-    schedule="*/10 * * * *",
+# Configure dbt project - Cosmos will read dbt_project.yml automatically
+project_config = ProjectConfig(
+    dbt_project_path=DBT_PROJECT_PATH,
+)
+
+execution_config = ExecutionConfig(
+    execution_mode=ExecutionMode.VIRTUALENV,
+    virtualenv_dir=os.getenv("VIRTUAL_ENV", str(PROJECT_ROOT / ".venv")),
+)
+
+# Create the DAG using Cosmos
+jaffleshop = DbtDag(
+    project_config=project_config,
+    profile_config=profile_config,
+    execution_config=execution_config,
+    dag_id="jaffleshop",
     start_date=datetime(2024, 1, 1),
+    schedule="*/10 * * * *",
     catchup=False,
-    is_paused_upon_creation=False,
-    tags=["dbt", "jaffle_shop"],
-) as dag:
-
-    dbt_deps = BashOperator(
-        task_id="dbt_deps",
-        bash_command=f"cd {DBT_PROJECT_PATH} && dbt deps",
-    )
-
-    dbt_run = BashOperator(
-        task_id="dbt_run",
-        bash_command=f"cd {DBT_PROJECT_PATH} && dbt run",
-    )
-
-    dbt_test = BashOperator(
-        task_id="dbt_test",
-        bash_command=f"cd {DBT_PROJECT_PATH} && dbt test",
-    )
-
-    # Define task dependencies
-    _ = dbt_deps >> dbt_run >> dbt_test
+    default_args={
+        "owner": "data_team",
+        "retries": 0,
+    },
+    description="Jaffle Shop dbt pipeline with Cosmos visualization",
+    tags=["dbt", "jaffleshop", "cosmos"],
+)
